@@ -1,0 +1,13 @@
+require './app'
+require 'sinatra/activerecord/rake'
+
+namespace :db do
+  task :init do
+    unless ActiveRecord::Base.connection.table_exists?(:visits)
+      ActiveRecord::Migration.create_table :visits do |t|
+        t.timestamps
+      end
+      puts "--- Таблица 'visits' успешно создана ---"
+    end
+  end
+end
