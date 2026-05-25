@@ -1,0 +1,5 @@
+surname,needs_dorm,experience,education,language
+Ivanov,True,3,college,English
+Petrov,False,1,technical school,German
+Sidorov,True,5,technical school,English
+Smith,False,0,high school,French
