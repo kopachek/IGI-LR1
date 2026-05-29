@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Promos{% endblock %}
+{% block content %}
+<h2>Promo codes &amp; coupons</h2>
+<h3>Active promos</h3>
+<ul>{% for p in active_promos %}<li>{{ p.code }} — {{ p.discount_percent }}% — {{ p.description }}</li>{% empty %}<li>None</li>{% endfor %}</ul>
+<h3>Archive</h3>
+<ul>{% for p in archived_promos %}<li>{{ p.code }} (archived)</li>{% empty %}<li>None</li>{% endfor %}</ul>
+<h3>Coupons</h3>
+<ul>{% for c in coupons %}<li>{{ c.title }} — {{ c.amount_off }} BYN — {% if c.is_active %}active{% else %}inactive{% endif %}</li>{% endfor %}</ul>
+{% endblock %}

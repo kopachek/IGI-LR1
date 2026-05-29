@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}Reviews{% endblock %}
+{% block content %}
+<h2>Reviews</h2>
+<p><a href="{% url 'review_add' %}">Add review</a> (login required)</p>
+<ul>
+{% for r in reviews %}
+  <li>{{ r.author_name }} — {{ r.rating }}/5 — {{ r.review_date|date:"d/m/Y" }}<br>{{ r.text }}</li>
+{% empty %}<li>No reviews yet.</li>{% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Employee dashboard{% endblock %}
+{% block content %}
+<h2>Employee: {{ employee }}</h2>
+<h3>Your clients</h3>
+<ul>{% for c in clients %}<li>{{ c }} — {{ c.phone }} — {{ c.email }}</li>{% empty %}<li>No assigned clients</li>{% endfor %}</ul>
+<h3>Orders &amp; sales</h3>
+<ul>{% for o in orders %}<li>#{{ o.pk }} — {{ o.client }} — {{ o.sale_date|date:"d/m/Y" }} — total {{ o.grand_total }} BYN</li>{% endfor %}</ul>
+{% endblock %}

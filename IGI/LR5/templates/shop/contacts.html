@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Contacts{% endblock %}
+{% block content %}
+<h2>Contacts</h2>
+<ul>
+{% for p in people %}
+  <li>
+    {% if p.photo %}<img src="{{ p.photo.url }}" alt="{{ p.full_name }}" width="120">{% endif %}
+    <strong>{{ p.full_name }}</strong> — {{ p.role_description }}<br>
+    Phone: {{ p.phone }} | Email: {{ p.email }}
+  </li>
+{% empty %}<li>No contacts.</li>{% endfor %}
+</ul>
+{% endblock %}

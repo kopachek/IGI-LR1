@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Statistics{% endblock %}
+{% block content %}
+<h2>Statistics</h2>
+<p>Total sales: <strong>{{ stats.total_sales }}</strong> BYN</p>
+<p>Sales mean / median / mode: {{ stats.sales_mean }} / {{ stats.sales_median }} / {{ stats.sales_mode }}</p>
+<p>Client age mean / median: {{ stats.age_mean }} / {{ stats.age_median }}</p>
+<p>Most popular category: <strong>{{ stats.popular_category }}</strong></p>
+<p>Highest profit category: <strong>{{ stats.top_profit_category }}</strong></p>
+<h3>Clients (A-Z)</h3>
+<ul>{% for c in stats.clients_alpha %}<li>{{ c }}</li>{% endfor %}</ul>
+<h3>Products (A-Z)</h3>
+<ul>{% for p in stats.products_alpha %}<li>{{ p.name }} — {{ p.price }}</li>{% endfor %}</ul>
+{% if chart_category %}<h3>Chart: categories</h3><img src="data:image/png;base64,{{ chart_category }}" alt="Category chart">{% endif %}
+{% endblock %}

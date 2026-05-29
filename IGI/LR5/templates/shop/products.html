@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Products{% endblock %}
+{% block content %}
+<h2>Products</h2>
+<form method="get">
+  {{ filter_form.as_p }}
+  <button type="submit">Filter / search</button>
+</form>
+<table border="1" cellpadding="4">
+  <tr><th>Name</th><th>Category</th><th>Price (BYN)</th><th>Unit</th></tr>
+  {% for p in products %}
+  <tr>
+    <td>{{ p.name }}</td>
+    <td>{{ p.category.name }}</td>
+    <td>{{ p.price }}</td>
+    <td>{{ p.get_unit_display }}</td>
+  </tr>
+  {% empty %}<tr><td colspan="5">No products</td></tr>{% endfor %}
+</table>
+{% if user.is_staff %}
+<p><a href="{% url 'product_create' %}">Create product</a></p>
+{% endif %}
+{% endblock %}

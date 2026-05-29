@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block title %}FAQ{% endblock %}
+{% block content %}
+<h2>FAQ / Glossary</h2>
+<dl>
+{% for e in entries %}
+  <dt>{{ e.question }}</dt>
+  <dd>{{ e.answer }} <small>(added {% for k,v in dates_local.items %}{% if k == e.pk %}{{ v }}{% endif %}{% endfor %} UTC/local in header)</small></dd>
+{% empty %}<p>No entries.</p>{% endfor %}
+</dl>
+{% endblock %}
