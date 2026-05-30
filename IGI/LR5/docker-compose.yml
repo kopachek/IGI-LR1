@@ -40,8 +40,6 @@ services:
     volumes:
       - media_data:/app/media
       - static_data:/app/staticfiles
-    # Запускаем от того же пользователя, что и в Dockerfile
-    user: "1000:1000"
 
 volumes:
   pgdata:

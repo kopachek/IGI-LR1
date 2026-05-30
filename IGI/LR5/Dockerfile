@@ -4,6 +4,7 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=UTC
+ENV PORT=8000
 
 WORKDIR /app
 
@@ -26,4 +27,6 @@ USER appuser
 
 EXPOSE 8000
 
-CMD ["gunicorn", "confectionery_shop.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD sh -c "python manage.py migrate && \
+           python manage.py collectstatic --noinput && \
+           gunicorn confectionery_shop.wsgi:application --bind 0.0.0.0:${PORT}"
