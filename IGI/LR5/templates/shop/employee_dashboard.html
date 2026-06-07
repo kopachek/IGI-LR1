@@ -5,5 +5,5 @@
 <h3>Your clients</h3>
 <ul>{% for c in clients %}<li>{{ c }} — {{ c.phone }} — {{ c.email }}</li>{% empty %}<li>No assigned clients</li>{% endfor %}</ul>
 <h3>Orders &amp; sales</h3>
-<ul>{% for o in orders %}<li>#{{ o.pk }} — {{ o.client }} — {{ o.sale_date|date:"d/m/Y" }} — total {{ o.grand_total }} BYN</li>{% endfor %}</ul>
+<ul>{% for o in orders %}{% if o.grand_total == 0 %}{% else %}<li>#{{ o.pk }} — {{ o.client }} — {{ o.sale_date|date:"d/m/Y" }} — total {{ o.grand_total }} BYN</li>{% endif %}{% endfor %}</ul>
 {% endblock %}

@@ -20,7 +20,6 @@ from shop.forms import (
     ProductCRUDForm,
     ProductFilterForm,
     ReviewForm,
-    TimezoneForm,
 )
 from shop.models import (
     Article,
@@ -76,16 +75,6 @@ def register(request):
     else:
         form = CustomerRegistrationForm()
     return render(request, 'shop/register.html', {'form': form})
-
-
-def set_timezone(request):
-    if request.method == 'POST':
-        form = TimezoneForm(request.POST)
-        if form.is_valid():
-            request.session['django_timezone'] = form.cleaned_data['timezone']
-            messages.info(request, f'Timezone set to {form.cleaned_data["timezone"]}')
-    return redirect(request.META.get('HTTP_REFERER', 'home'))
-
 
 def home(request):
     latest = Article.objects.filter(is_published=True).order_by('-published_at').first()
@@ -277,7 +266,7 @@ def employee_dashboard(request):
         {'employee': employee, 'clients': clients, 'orders': orders},
     )
 
-
+@employee_required
 def statistics_page(request):
     stats = sales_statistics()
     chart_category = build_category_chart_base64()
@@ -311,7 +300,8 @@ class ProductUpdateView(LoginRequiredMixin, StaffRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         ctx = super().get_context_data(**kwargs)
-        ctx['title'] = 'Update product'
+        ctx['title'] = 'Edit product'
+        ctx['product'] = self.object
         return ctx
 
 

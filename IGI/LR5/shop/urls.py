@@ -21,7 +21,6 @@ urlpatterns = [
     path('login/', views.ShopLoginView.as_view(), name='login'),
     path('logout/', views.ShopLogoutView.as_view(), name='logout'),
     path('register/', views.register, name='register'),
-    path('timezone/', views.set_timezone, name='set_timezone'),
     path('pickup/', views.pickup_points, name='pickup_points'),
     path('history/', views.purchase_history, name='purchase_history'),
     path('my-promos/', views.my_promos, name='my_promos'),

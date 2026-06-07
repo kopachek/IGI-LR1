@@ -3,8 +3,11 @@
 {% block content %}
 <h2>Purchase history</h2>
 {% for o in orders %}
+{% if o.items_total == 0 %}
+{% else %}
   <h3>Order #{{ o.pk }} — sale {% for k,v in dates.items %}{% if k == o.pk %}{{ v }}{% endif %}{% endfor %}</h3>
   <p>Delivery: {{ o.delivery_date|date:"d/m/Y" }} | Total: {{ o.grand_total }} BYN</p>
   <ul>{% for item in o.items.all %}<li>{{ item.product.name }} x{{ item.quantity }} = {{ item.line_total }}</li>{% endfor %}</ul>
+{% endif %}
 {% empty %}<p>No orders yet. <a href="{% url 'checkout' %}">Buy now</a></p>{% endfor %}
 {% endblock %}

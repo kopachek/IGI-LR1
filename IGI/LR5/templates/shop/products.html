@@ -10,7 +10,11 @@
   <tr><th>Name</th><th>Category</th><th>Price (BYN)</th><th>Unit</th></tr>
   {% for p in products %}
   <tr>
+    {% if user.is_staff%}
+    <td><a href="{% url 'product_edit' pk=p.pk %}">{{ p.name }}</a></td>
+    {% else %}
     <td>{{ p.name }}</td>
+    {% endif %}
     <td>{{ p.category.name }}</td>
     <td>{{ p.price }}</td>
     <td>{{ p.get_unit_display }}</td>

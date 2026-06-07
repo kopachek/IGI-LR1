@@ -192,6 +192,8 @@ class Order(TimeStampedModel):
     @property
     def items_total(self) -> Decimal:
         total = self.items.aggregate(total=Sum(F('unit_price') * F('quantity')))['total']
+        if total is None:
+            return Decimal('0.00')
         return round(total, 2) or Decimal('0.00')
 
     @property
@@ -203,7 +205,7 @@ class OrderItem(models.Model):
     """Line item in an order (M2M through table)."""
 
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
-    product = models.ForeignKey(Product, on_delete=models.PROTECT, related_name='order_items')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='order_items')
     quantity = models.IntegerField(default=1, validators=[MinValueValidator(1)])
     unit_price = models.DecimalField(max_digits=10, decimal_places=2)
 

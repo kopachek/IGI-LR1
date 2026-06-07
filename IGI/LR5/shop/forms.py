@@ -112,7 +112,3 @@ class ProductCRUDForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = ('name', 'price', 'unit', 'category', 'manufacturer', 'description', 'is_available')
-
-
-class TimezoneForm(forms.Form):
-    timezone = forms.CharField(max_length=64)

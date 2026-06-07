@@ -3,4 +3,9 @@
 {% block content %}
 <h2>{{ title }}</h2>
 <form method="post">{% csrf_token %}{{ form.as_p }}<button type="submit">Save</button></form>
+{% if product %}
+<form method="post" action="{% url 'product_delete' pk=product.pk %}">{% csrf_token %}
+    <button type="submit" style="color: red;">Delete</button>
+</form>
+{% endif %}
 {% endblock %}

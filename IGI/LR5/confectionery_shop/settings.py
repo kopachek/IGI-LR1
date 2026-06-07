@@ -70,7 +70,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'confectionery_shop.wsgi.application'
 
-if os.environ.get('DATABASE_URL') or os.environ.get('POSTGRES_DB'):
+if os.environ.get('DATABASE_URL'):
+    DATABASES = {
+        'default': dj_database_url.parse(os.environ['DATABASE_URL'])
+    }
+else if os.environ.get('POSTGRES_DB'):
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
