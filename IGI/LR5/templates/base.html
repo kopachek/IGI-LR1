@@ -18,7 +18,6 @@
       <a href="{% url 'promos' %}">Promos</a> |
       <a href="{% url 'categories' %}">Categories</a> |
       <a href="{% url 'product_list' %}">Products</a> |
-      <a href="{% url 'statistics' %}">Statistics</a> |
       <a href="{% url 'privacy' %}">Privacy</a>
       {% if user.is_authenticated %}
         {% if user.client_profile %}
@@ -26,7 +25,10 @@
         | <a href="{% url 'checkout' %}">Buy</a>
         | <a href="{% url 'pickup_points' %}">Pickup</a>
         | <a href="{% url 'my_promos' %}">My promos</a>
-        {% elif user.employee_profile %}| <a href="{% url 'employee_dashboard' %}">Employee</a>{% endif %}
+        {% elif user.employee_profile %}
+        | <a href="{% url 'employee_dashboard' %}">Employee</a>
+        | <a href="{% url 'statistics' %}">Statistics</a>
+        {% endif %}
         | <a href="{% url 'logout' %}">Logout ({{ user.username }})</a>
       {% else %}
         | <a href="{% url 'login' %}">Login</a>
